@@ -5,18 +5,31 @@ import java.net.URL;
 import java.util.*;
 
 public class URLList {
+
+    private static void freq(List<String> string) {
+        Map<String,Integer > counter = new HashMap<>();
+        for(String x: string){
+            int newValue = counter.getOrDefault(x,0)+1;
+            counter.put(x,newValue);
+        }
+        System.out.println(counter);
+        counter.entrySet().stream().sorted(Map.Entry.<String,Integer>comparingByValue().reversed())
+                .forEach(System.out::println);
+    }
+
+
     public static void main(String[] args) throws IOException {
         URL url = new URL("http://madbrains.github.io/java_course_test");
         BufferedReader in = new BufferedReader(
                 new InputStreamReader(url.openStream()));
         String inputLine;
-        String res = null;
+        StringBuilder res = new StringBuilder();
         long CountWord;
         List<String> string = new ArrayList<>();
         while((inputLine=in.readLine())!=null){
-            res+=inputLine+" ";
+            res.append(inputLine.toLowerCase(Locale.ROOT)).append(" ");
         }
-        String[] arr = res.split("\\s*(|-|_|—|,|\\.)\\s");
+        String[] arr = res.toString().split("\\s*(|-|_|—|,|\\.)\\s");
         for(int i=0;i<arr.length;i++){
             System.out.println(i+": ["+arr[i]+"]");
             string.add(arr[i]);
@@ -43,14 +56,4 @@ public class URLList {
 //        }
     }
 
-    private static void freq(List<String> string) {
-        Map<String,Integer > counter = new HashMap<>();
-        for(String x: string){
-            int newValue = counter.getOrDefault(x,0)+1;
-            counter.put(x,newValue);
-        }
-        System.out.println(counter);
-        counter.entrySet().stream().sorted(Map.Entry.<String,Integer>comparingByValue().reversed())
-                .forEach(System.out::println);
-    }
 }
