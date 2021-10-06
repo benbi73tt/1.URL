@@ -15,30 +15,25 @@ public class WorkString {
         Collections.addAll(string, arr);
     }
 
-    public void sorting() {
-        Collections.sort(string);
-        System.out.println(string);
-    }
-
-    public void countWord() throws IOException {
-        String[] arr = n.splitFile(url);
+    public void countWord(){
         System.out.println("Количество слов в файле: "+ arr.length);
     }
 
     public void duplicate() {
         Map<String,Integer > counter = new HashMap<>();
         for(String x: string){
-            int newValue = counter.getOrDefault(x,0)+1;
+            int newValue = counter.getOrDefault(x,0) + 1;
             counter.put(x,newValue);
         }
+        System.out.println("Сколько и какие слова повторяются: " );
         counter.entrySet().stream().sorted(Map.Entry.<String,Integer>comparingByValue().reversed())
                 .forEach(System.out::println);
     }
 
     public void Print(){
         System.out.println("Все имеющиеся слова в тексте: "+ string);
-        System.out.println("Сколько и какие слова повторяются: " ); duplicate();
-        System.out.println("Количество слов в тексе: " + arr.length);
+        duplicate();
+        countWord();
     }
 
 
