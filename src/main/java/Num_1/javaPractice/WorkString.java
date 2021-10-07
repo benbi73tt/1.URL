@@ -4,14 +4,11 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.*;
 
-public class WorkString {
-    private final URL url;
-    public FileSplit n = new FileSplit();
+public class WorkString implements Working_with_a_String {
     public List<String> string = new ArrayList<>();
     private final String[] arr;
-    public WorkString(String s) throws IOException {
-        this.url = new URL(s);
-        arr = n.splitFile(url);
+    public WorkString(String[] array) throws IOException {
+        arr = array;
         Collections.addAll(string, arr);
     }
 

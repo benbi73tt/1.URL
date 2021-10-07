@@ -5,12 +5,15 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.URL;
 
-public class SearchURL {
+public abstract class SearchURL implements InterfaceURL {
+    private BufferedReader in;
     public SearchURL(){}
-    public BufferedReader SearchURL(URL urlIn) throws IOException {
-        BufferedReader in = new BufferedReader(
+    public void buffer(URL urlIn) throws IOException {
+        in = new BufferedReader(
                 new InputStreamReader(urlIn.openStream()));
+    }
+    public BufferedReader giveBuf(URL urlIn) throws IOException {
+        buffer(urlIn);
         return in;
-
     }
 }
