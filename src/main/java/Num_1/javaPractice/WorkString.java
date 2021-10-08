@@ -1,37 +1,42 @@
 package Num_1.javaPractice;
-
-import java.io.IOException;
-import java.net.URL;
 import java.util.*;
+import java.util.stream.Stream;
 
-public class WorkString implements Working_with_a_String {
+public class WorkString implements InterfaceParser {
     public List<String> string = new ArrayList<>();
-    private final String[] arr;
-    public WorkString(String[] array) throws IOException {
-        arr = array;
-        Collections.addAll(string, arr);
+    private String[] arr;
+    public WorkString() {
     }
 
-    public void countWord(){
-        System.out.println("Количество слов в файле: "+ arr.length);
+    public int countWord(){
+        return arr.length;
     }
 
-    public void duplicate() {
+    public Map<String, Integer> duplicate() {
         Map<String,Integer > counter = new HashMap<>();
         for(String x: string){
             int newValue = counter.getOrDefault(x,0) + 1;
             counter.put(x,newValue);
         }
+        return counter;
+    }
+
+    public Stream<Map.Entry<String, Integer>> sorting(){
+        Map<String, Integer> sort = duplicate();
+        return sort.entrySet().stream().sorted(Map.Entry.<String,Integer>comparingByValue()
+                .reversed());
+    }
+
+    public List<String> allWord(){
+        return string;
+    }
+
+    public void print(String[] array){
+        arr = array;
+        Collections.addAll(string, arr);
+        System.out.println("Все имеющиеся слова в тексте: " + allWord());
         System.out.println("Сколько и какие слова повторяются: " );
-        counter.entrySet().stream().sorted(Map.Entry.<String,Integer>comparingByValue().reversed())
-                .forEach(System.out::println);
+        sorting().forEach(System.out::println);
+        System.out.println("Количество слов в файле: " + countWord());
     }
-
-    public void Print(){
-        System.out.println("Все имеющиеся слова в тексте: "+ string);
-        duplicate();
-        countWord();
-    }
-
-
 }
