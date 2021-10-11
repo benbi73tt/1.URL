@@ -9,6 +9,7 @@ public class MadBrains {
         InterfaceParser parse = new WorkString();
         ServiceWord RP = new ServiceWord(read,parse);
         RP.convert();
+        RP.getCountResult();
     }
 
 }

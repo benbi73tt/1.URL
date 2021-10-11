@@ -6,5 +6,5 @@ import java.io.IOException;
 public interface InterfaceURL {
 
     BufferedReader buffer() throws IOException;
-    String[] splitFile() throws IOException;
+
 }
